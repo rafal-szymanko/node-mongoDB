@@ -11,7 +11,8 @@ const employeesSchema = new mongoose.Schema({
     },
     department: {
         type: String,
-        required: true
+        required: true,
+        ref: 'Department',
     },
 }, {
     versionKey: false,
