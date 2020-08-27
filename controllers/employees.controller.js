@@ -56,7 +56,7 @@ exports.postNewEmployee = async (req, res) => {
       department: department
     });
     await newEmployee.save();
-    res.json(await Employee.find())
+    res.json(await Employee.find().populate('department'));
   } catch (err) {
     res.status(500).json({
       message: err
@@ -77,7 +77,7 @@ exports.updateEmployee = async (req, res) => {
           department: department
         }
       })
-      res.json(await Employee.find())
+      res.json(await Employee.find().populate('department'));
 
     } else {
       res.status(404).json({
@@ -98,7 +98,7 @@ exports.deleteEmployee = async (req, res) => {
       await Employee.deleteOne({
         _id: req.params.id
       });
-      res.json(await Employee.find())
+      res.json(await Employee.find().populate('department'));
     } else {
       res.status(404).json({
         message: 'Not found'
