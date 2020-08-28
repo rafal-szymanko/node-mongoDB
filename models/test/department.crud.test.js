@@ -28,7 +28,7 @@ describe('Department', () => {
 
   describe('Reading data', () => {
 
-    beforeEach(async () => {
+    before(async () => {
       const testDepOne = new Department({
         name: 'Department #1'
       });
@@ -38,6 +38,10 @@ describe('Department', () => {
         name: 'Department #2'
       });
       await testDepTwo.save();
+    });
+
+    after(async () => {
+      await Department.deleteMany();
     });
 
     it('should return all the data with "find" method', async () => {
@@ -52,11 +56,7 @@ describe('Department', () => {
         name: 'Department #1'
       });
       const expectedName = 'Department #1';
-      expect(department.name).to.be.equal('Department #1');
-    });
-
-    afterEach(async () => {
-      await Department.deleteMany();
+      expect(department.name).to.be.equal(expectedName);
     });
 
   });
